@@ -1,0 +1,27 @@
+## Interface: 60000
+## DefaultState: Enabled
+## Title: |cFF007FFFO3|r Unitframes
+## Author: Oz
+## Version: 0.1
+## Notes: O3 Unitframes
+## RequiredDeps: O3
+
+Handler.lua
+
+Widgets\Widget.lua
+Widgets\Health.lua
+Widgets\Power.lua
+Widgets\Auras.lua
+Widgets\CastBar.lua
+Widgets\ClassIcon.lua
+Widgets\RaidTarget.lua
+
+UnitFrame.lua
+
+Layout\Player.lua
+Layout\Target.lua
+Layout\Focus.lua
+Layout\GroupHeader.lua
+Layout\Raid.lua
+Layout\Arena.lua
+Layout\Boss.lua
