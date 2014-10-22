@@ -531,8 +531,10 @@ ns.Widgets.Auras = O3.Class:extend({
 	createIcons = function (self, parentFrame, filter, groupInfo)
 		local anchorInfo = self.anchors[groupInfo.side]
 		self._auraStore[filter] = {}
-		for i = 1, groupInfo.cols*groupInfo.rows do
+		for i = 1, 40 do 
 			self._auraStore[filter][i] = {}
+		end
+		for i = 1, groupInfo.cols*groupInfo.rows do
 			local icon = AuraIcon:instance({
 				expirationTime = 0,
 				parentFrame = parentFrame,
@@ -681,6 +683,9 @@ ns.Widgets.Auras = O3.Class:extend({
 					local filtered = self:auraFilter(name, rank, icon, count, debuffType, duration, expirationTime, unitCaster, isStealable, shouldConsolidate, spellId, filter, score)
 					if (filtered) then
 						local aura = auraStore[auraIndex]
+						if (not aura) then
+							print(auraIndex, ' not found')
+						end
 						aura.spellId = spellId
 						aura.durationless = durationless	
 						aura.debuffType = debuffType

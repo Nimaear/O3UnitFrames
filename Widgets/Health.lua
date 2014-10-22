@@ -58,8 +58,8 @@ ns.Widgets.Health = O3.UI.Panel:extend({
 
 		if UnitIsConnected(unit) then
 			if UnitIsDead(unit) then
-				healthBar:SetMinMaxValues(0, 1)
-				healthBar:SetValue(1)
+				-- healthBar:SetMinMaxValues(0, 1)
+				healthBar:SetValue(0)
 				healthBar:SetStatusBarColor(0.9, 0.2, 0.2)
 				if (self.text) then
 					self.text:SetText("Dead")
@@ -79,7 +79,7 @@ ns.Widgets.Health = O3.UI.Panel:extend({
 				self.maxHealth = maxHealth
 			end
 		else
-			healthBar:SetMinMaxValues(0, 1)
+			--healthBar:SetMinMaxValues(0, 1)
 			healthBar:SetValue(0)			
 			if (self.text) then
 				self.text:SetText("")
