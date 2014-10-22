@@ -242,7 +242,7 @@ ns.UnitFrame = O3.UI.Panel:extend({
 					if self.unit == 'player' or UnitInRange(self.unit) then
 						self.frame:SetAlpha(1)
 					else
-						self.frame:SetAlpha(0.7)
+						self.frame:SetAlpha(0.3)
 					end
 				end
 				if (self.config.combat) then

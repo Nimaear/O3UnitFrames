@@ -331,6 +331,7 @@ local AuraIcon = O3.UI.Panel:extend({
 		self.count:SetText(count)
 		self.icon:SetTexture(texture)
 		if self.start ~= start then
+			self.cooldown:Show()
 			self.cooldown:SetCooldown(start, duration)
 			self.start = start
 		end
@@ -765,6 +766,7 @@ ns.Widgets.Auras = O3.Class:extend({
 				if icon.enabled then
 					local aura = icon.aura
 					icon:Show()
+					icon.cooldown:Show()
 					icon.cooldown:SetCooldown(aura.start, aura.duration)
 				else
 					icon.cooldown:Hide()
