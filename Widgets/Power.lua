@@ -15,7 +15,7 @@ ns.Widgets.Power = ns.Widgets.Health:extend({
 		end
 		self:registerEvents()
 	end,
-	UNIT_POWER = function (self)
+	UNIT_POWER = function (self, unit, powerType)
 		local power = UnitPower(self.unit)
 		self.frame:SetValue(power)
 	end,
