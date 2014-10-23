@@ -147,6 +147,7 @@ ns.Widgets.Health = O3.UI.Panel:extend({
 				width = 100,
 				color = {0.8, 0.8, 0.8, 0.8},
 				justifyH = 'RIGHT',
+				shadowOffset = {1, -1},
 			})
 		end
 		if (self.nameText) then
