@@ -5,11 +5,11 @@ ns.Widgets.Health = O3.UI.Panel:extend({
 	type = 'StatusBar',
 	color = {0.1, 0.9, 0.1, 1},
 	texture = O3.Media:statusBar('Stone'),
+	text = false,
+	nameText = false,
 	unitEvents = {
 		UNIT_MAXHEALTH = true,
 	},
-	text = false,
-	nameText = false,
 	-- predict = false,
 	setupEvents = function (self)
 	end,
@@ -88,9 +88,6 @@ ns.Widgets.Health = O3.UI.Panel:extend({
 		
 	end,
 	formatHP = function (self, health, maxHealth)
-		if health == maxHealth then
-			return ''
-		end
 		local percentage
 		if(maxHealth == 0) then
 			percentage =  0

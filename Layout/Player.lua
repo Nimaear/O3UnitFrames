@@ -39,6 +39,10 @@ local Player = ns.UnitFrame:instance({
 			height = 20,
 			offset = {0, 0, -21, nil}
 		})
+		self:createWidget('AltPower', {
+			offset = {0, 0, -37, nil},
+			height = 15,
+		})
 		self:createWidget('RaidTarget', {
 			parentFrame = health.frame
 		})
