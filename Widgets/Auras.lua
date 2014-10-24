@@ -413,7 +413,7 @@ ns.Widgets.Auras = O3.Class:extend({
 				self:createWatchers()
 			end
 			self._watchedStore = {}
-			for i = 1, 40 do
+			for i = 1, 80 do
 				self._watchedStore[i] = {}
 
 			end
