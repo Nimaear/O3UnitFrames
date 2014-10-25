@@ -38,7 +38,7 @@ ns.Widgets.Power = ns.Widgets.Health:extend({
 	end,
 })
 
-local ALTERNATE_POWER_INDEX = ALTERNATE_POWER_INDEX
+local SPELL_POWER_ALTERNATE_POWER = SPELL_POWER_ALTERNATE_POWER
 
 ns.Widgets.AltPower = ns.Widgets.Health:extend({
 	text = true,
@@ -55,7 +55,7 @@ ns.Widgets.AltPower = ns.Widgets.Health:extend({
 	UNIT_POWER = function (self, unit, powerType)
 		if (powerType == 'ALTERNATE') then
 			local unit = self.unit
-			local unitPower, unitPowerMax = UnitPower(unit, ALTERNATE_POWER_INDEX), UnitPowerMax(unit, ALTERNATE_POWER_INDEX)
+			local unitPower, unitPowerMax = UnitPower(unit, SPELL_POWER_ALTERNATE_POWER), UnitPowerMax(unit, SPELL_POWER_ALTERNATE_POWER)
 			local barType, min, _, _, _, _, _, _, _, altPowerName, altPowerTooltip = UnitAlternatePowerInfo(unit)
 			if (barType) then
 				self.powerName = altPowerName
@@ -76,7 +76,7 @@ ns.Widgets.AltPower = ns.Widgets.Health:extend({
 	end,
 	reset = function (self)
 		local unit = self.unit
-		local unitPower, unitPowerMax = UnitPower(unit, ALTERNATE_POWER_INDEX), UnitPowerMax(unit, ALTERNATE_POWER_INDEX)
+		local unitPower, unitPowerMax = UnitPower(unit, SPELL_POWER_ALTERNATE_POWER), UnitPowerMax(unit, SPELL_POWER_ALTERNATE_POWER)
 		local barType, min, _, _, _, _, _, _, _, altPowerName, altPowerTooltip = UnitAlternatePowerInfo(unit)
 		if (barType) then
 			self.powerName = altPowerName
@@ -96,7 +96,7 @@ ns.Widgets.AltPower = ns.Widgets.Health:extend({
 	end,	
 	UNIT_MAXPOWER = function (self, unit, powerType)
 		if (powerType == 'ALTERNATE') then
-			local power, maxPower = UnitPower(self.unit, ALTERNATE_POWER_INDEX), UnitPowerMax(self.unit, ALTERNATE_POWER_INDEX)
+			local power, maxPower = UnitPower(self.unit, SPELL_POWER_ALTERNATE_POWER), UnitPowerMax(self.unit, SPELL_POWER_ALTERNATE_POWER)
 			self.frame:SetMinMaxValues(0, maxPower)
 			self.frame:SetValue(power)
 		end
