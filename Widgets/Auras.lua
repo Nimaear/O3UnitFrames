@@ -278,7 +278,7 @@ local AuraIcon = O3.UI.Panel:extend({
 	style = function (self)
 		self.outline = self:createTexture({
 			layer = 'BACKGROUND',
-			subLayer = -8,
+			subLayer = -6,
 			color = {0, 0, 0, 0.65},
 			offset = {0, 0, 0, 0},
 			-- height = 1,
@@ -301,13 +301,14 @@ local AuraIcon = O3.UI.Panel:extend({
 		})
 		self.icon = self:createTexture({
 			layer = 'BACKGROUND',
-			subLayer = -7,
+			subLayer = -5,
 			file = self.icon,
 			coords = {.08, .92, .08, .92},
 			tile = false,
 			offset = {1,1,1,1},
 		})
 		self.cooldown = CreateFrame('Cooldown', nil, self.frame, "CooldownFrameTemplate")
+		self.cooldown:SetFrameLevel(self.frame:GetFrameLevel()+1)
 		self.cooldown:SetDrawEdge(false)
 		self.cooldown:SetDrawSwipe(true)
 
@@ -325,15 +326,15 @@ local AuraIcon = O3.UI.Panel:extend({
 	end,
 	update = function (self, aura)
 		self.aura = aura
-		local texture, count, start, duration, debuffType = aura.icon, aura.count, aura.expirationTime-aura.duration, aura.duration, aura.debuffType
+		local texture, count, expirationTime, duration, debuffType = aura.icon, aura.count, aura.expirationTime, aura.duration, aura.debuffType
 		self.frame:Show()
 		count = count > 1 and count or ''
 		self.count:SetText(count)
 		self.icon:SetTexture(texture)
-		if self.start ~= start then
+		if self.expirartionTime ~= expirationTime then
 			self.cooldown:Show()
-			self.cooldown:SetCooldown(start, duration)
-			self.start = start
+			self.cooldown:SetCooldown(expirationTime-duration, duration)
+			self.expirationTime = expirationTime
 		end
 		if debuffType then
 			local color = DebuffTypeColor[debuffType]
