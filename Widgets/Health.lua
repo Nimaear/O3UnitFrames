@@ -54,13 +54,13 @@ ns.Widgets.Health = O3.UI.Panel:extend({
 			color = self.color
 		end
 		healthBar:SetStatusBarColor(unpack(color))
-		self.bg:SetVertexColor(0.7, 0.1, 0.1, 1)
+		
 
 		if UnitIsConnected(unit) then
 			if UnitIsDead(unit) then
-				-- healthBar:SetMinMaxValues(0, 1)
-				healthBar:SetValue(1)
-				healthBar:SetStatusBarColor(0.9, 0.2, 0.2)
+				healthBar:SetMinMaxValues(0, 1)
+				healthBar:SetValue(0)
+				-- healthBar:SetStatusBarColor(0.9, 0.2, 0.2)
 				if (self.text) then
 					self.text:SetText("Dead")
 				end
@@ -79,7 +79,7 @@ ns.Widgets.Health = O3.UI.Panel:extend({
 				self.maxHealth = maxHealth
 			end
 		else
-			--healthBar:SetMinMaxValues(0, 1)
+			healthBar:SetMinMaxValues(0, 1)
 			healthBar:SetValue(0)			
 			if (self.text) then
 				self.text:SetText("")
@@ -139,6 +139,7 @@ ns.Widgets.Health = O3.UI.Panel:extend({
 			color = {0, 0, 0, 1 },
 			offset = {0, 0, 0, 0 },
 		})
+		self.bg:SetVertexColor(0.7, 0.1, 0.1, 1)
 	end,
 	createRegions = function (self)
 		if (self.text) then

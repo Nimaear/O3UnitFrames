@@ -2,7 +2,7 @@ local addon, ns = ...
 local O3 = O3
 
 local Raid = ns.UnitFrame:extend({
-	width = 90,
+	width = 60,
 	height = 40,
 	powerBarHeight = 5,
 	name = 'Raid',
@@ -80,9 +80,9 @@ local Raid = ns.UnitFrame:extend({
 
 local RaidHeader = ns.GroupHeader:instance({
 	config = {
-		width = 100,
+		width = 60,
 		height = 40,
-		maxColumns = 4,
+		maxColumns = 6,
 		showPlayer = true,
 		showSolo = true,
 		unitsPerColumn = 5,
