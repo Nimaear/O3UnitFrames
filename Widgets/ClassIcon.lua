@@ -68,3 +68,5 @@ ns.Widgets.ClassIcon = O3.UI.Panel:extend({
 		})	
 	end,
 })
+
+

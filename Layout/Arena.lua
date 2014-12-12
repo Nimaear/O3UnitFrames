@@ -3,24 +3,38 @@ local O3 = O3
 
 local Arena = ns.UnitFrame:extend({
 	name = 'O3Arena',
-	width = 233,
-	height = 40,
+	width = 231,
+	height = 32,
 	powerBarHeight = 10,
 	unit = 'player',
+	cooldownIcons = true,
 	config = {
 		visible = true,
-		XOffset = 470,
 		YOffset = -250,
-		anchor = 'LEFT',
-		anchorTo = 'CENTER',
-		anchorParent = 'Screen',
+		XOffset = -300,
+		YOffset = y,
+		anchor = 'TOPRIGHT',
+		anchorTo = 'TOPRIGHT',
+		altPowerBar = false,
 	},	
 	unitEvents = {
 		UNIT_NAME_UPDATE = true,
 	},
 	events = {
 		PLAYER_ENTERING_WORLD = true,
-	},	
+		ARENA_OPPONENT_UPDATE = true,
+		ARENA_PREP_OPPONENT_SPECIALIZATIONS = true,
+	},
+	ARENA_OPPONENT_UPDATE = function (self, unitId)
+		self:reset()
+	end,
+	ARENA_PREP_OPPONENT_SPECIALIZATIONS = function (self, ...)
+		local opponentCount = GetNumArenaOpponentSpecs()
+		for i=1, opponentCount do
+			local specId = GetArenaOpponentSpec(i)
+			local _, spec, _, specIcon, _, _, class = GetSpecializationInfoByID(specId)
+		end 
+	end,
 	createRegions = function (self)
 		local health = self:createWidget('Health', {
 			frequent = true,
@@ -37,15 +51,28 @@ local Arena = ns.UnitFrame:extend({
 			height = self.powerBarHeight,
 		})
 		self:createWidget('CastBar', {
-			height = 20,
-			offset = {0, 0, -22, nil}
+			height = 12,
+			offset = {0, 0, -13, nil}
 		})
+		if (self.altPowerBar) then
+			self:createWidget('AltPower', {
+				offset = {0, 0, -26, nil},
+				height = 12,
+			})
+		end
+		if (self.cooldownIcons) then
+			local cooldownIcons = self:createWidget('CooldownIcons', {
+				offset = {0, 0, nil, nil},
+				height = 22,
+			})
+			cooldownIcons:point('TOP', self.frame, 'BOTTOM', 0, -1)
+		end
 		self:createWidget('Auras', {
 			preInit = function (auras)
 				auras.groups = nil
 				auras.watch.enabled = true
 				auras.watch.side = 'OWN'
-				auras.watch.count = 10
+				auras.watch.count = 2
 				auras.watch.size = 28
 			end,
 			createWatchers = function (auras)
@@ -65,20 +92,6 @@ local Arena = ns.UnitFrame:extend({
 					end
 					auras.watcherIcons[i] = icon
 				end
-				for i = 3, auras.watch.count do
-					local icon = ns.AuraIcon:instance({
-						expirationTime = 0,
-						parentFrame = parentFrame,
-						width = auras.watch.size,
-						height = auras.watch.size,
-					})
-					if i == 3 then
-						icon:point('TOPLEFT', auras.parent.frame, 'BOTTOMLEFT', 0, -2)
-					else
-						icon:point('LEFT', auras.watcherIcons[i-1].frame, 'RIGHT', 1, 0)
-					end
-					auras.watcherIcons[i] = icon
-				end
 			end,
 			watchFilter = function (self, name, rank, icon, count, debuffType, duration, expirationTime, unitCaster, isStealable, shouldConsolidate, spellId, type, score)
 				return (unitCaster == "player")  or (duration ~= 0 and duration <= 121) or (score > 1)
@@ -94,16 +107,21 @@ local Arena = ns.UnitFrame:extend({
 ns.Arena = Arena
 
 for i = 1, 5 do
-	local y = 350 - i*100
+	local y = - 150 - i*100
+	-- local unit = 'player'
+	-- if (i == 5) then
+	-- 	unit = 'target'
+	-- end
 	local arena = Arena:instance({
 		name = Arena.name..i,
 		unit = 'arena'..i,
+		-- unit = unit,
 		config = {
 			visible = true,
-			XOffset = 500,
+			XOffset = -300,
 			YOffset = y,
-			anchor = 'LEFT',
-			anchorTo = 'CENTER',
+			anchor = 'TOPRIGHT',
+			anchorTo = 'TOPRIGHT',
 			anchorParent = 'Screen',
 		}
 	})

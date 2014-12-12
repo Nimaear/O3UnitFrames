@@ -14,6 +14,7 @@ Widgets\Power.lua
 Widgets\Auras.lua
 Widgets\CastBar.lua
 Widgets\ClassIcon.lua
+Widgets\CooldownIcons.lua
 Widgets\RaidTarget.lua
 
 UnitFrame.lua
